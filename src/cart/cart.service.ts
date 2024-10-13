@@ -61,10 +61,10 @@ export class CartService {
     const userdata: User = request['user'];
     console.log(userdata);
 
-    const token: any = request.headers.token;
+    // const token: any = request.headers.token;
 
     try {
-      const { id }: any = verify(token, 'secret_key');
+      // const { id }: any = verify(token, 'secret_key');
       const user = await this.userRepository.findOne({
         where: { id: userdata.id },
       });
@@ -90,7 +90,7 @@ export class CartService {
 
       const cart = this.cartRepository.create();
       cart.user = user;
-      cart.user_id = id;
+      // cart.user_id = id;
       cart.books = [bookFind];
 
       response.send({
