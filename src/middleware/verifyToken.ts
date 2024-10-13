@@ -1,4 +1,4 @@
-import {NestMiddleware} from '@nestjs/common'
+import { NestMiddleware } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';

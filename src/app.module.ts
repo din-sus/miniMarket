@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { VerifyToken } from './middleware/verifyToken';
@@ -16,11 +21,11 @@ import { User } from './users/entities/user.entity';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '0490',
+      password: '1234',
       database: 'najot',
-      entities: [],
+      entities: [User],
       synchronize: true,
-      autoLoadEntities: true
+      autoLoadEntities: true,
     }),
     UsersModule,
     BooksModule,
@@ -30,7 +35,7 @@ import { User } from './users/entities/user.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements NestModule{
+export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(VerifyToken)

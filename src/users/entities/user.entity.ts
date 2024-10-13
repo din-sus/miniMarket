@@ -4,17 +4,17 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({unique: true})
-    login: string
+  @Column({ unique: true })
+  login: string;
 
-    @Column()
-    password: string
+  @Column()
+  password: string;
 
-    @Column()
-    fullname: string
+  @Column()
+  fullname: string;
 
     @Column({default: 'user'})
     role: string

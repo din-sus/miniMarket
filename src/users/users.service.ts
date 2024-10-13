@@ -7,14 +7,19 @@ import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
   async login(createUserDto: LoginUserDto) {
     try {
-      let check = await this.userRepository.findOne({where: {login: createUserDto.login, password: createUserDto.password}})
+      const check = await this.userRepository.findOne({
+        where: { login: createUserDto.login, password: createUserDto.password },
+      });
 
-      if(!check) {
+      if (!check) {
         return {
           success: false,
           message: 'Please register❗'
@@ -33,46 +38,49 @@ export class UsersService {
     } catch (error) {
       return {
         success: false,
-        message: error.message
-      }
+        message: error.message,
+      };
     }
   }
 
   async register(createUserDto: RegisterUserDto) {
     try {
-      let check = await this.userRepository.findOne({where: {login: createUserDto.login, password: createUserDto.password}})
+      const check = await this.userRepository.findOne({
+        where: { login: createUserDto.login, password: createUserDto.password },
+      });
 
-      if(check) {
+      if (check) {
         return {
           success: false,
-          message: 'You registered before❗'
-        }
-      }else {
-        const user = this.userRepository.create(createUserDto)
-        await this.userRepository.save(user)
+          message: 'You registered before❗',
+        };
+      } else {
+        const user = this.userRepository.create(createUserDto);
+        await this.userRepository.save(user);
 
         return {
           success: true,
-          message: 'You have registered successfully✅'
-        }
+          message: 'You have registered successfully✅',
+        };
       }
     } catch (error) {
       return {
         success: false,
-        message: error.message
-      }
+        message: error.message,
+      };
     }
   }
 
   async findAll() {
-    return await this.userRepository.find()
+    return await this.userRepository.find();
   }
 
   findOne(id: number) {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  update(id: number, _updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
 
