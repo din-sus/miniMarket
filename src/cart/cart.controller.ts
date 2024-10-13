@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { CartService } from './cart.service';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
@@ -9,7 +19,11 @@ export class CartController {
   constructor(private readonly cartService: CartService) {}
 
   @Post('add')
-  create(@Req() request: Request, @Res() response: Response) {
+  create(
+    @Req() request: Request,
+    @Res() response: Response,
+    @Body() createCartDto: CreateCartDto,
+  ) {
     return this.cartService.create(request, response);
   }
 
@@ -20,7 +34,7 @@ export class CartController {
 
   @Get('my/cart')
   findOne(@Req() request: Request) {
-    return this.cartService.findOne(request)
+    return this.cartService.findOne(request);
   }
 
   @Patch(':id')
