@@ -4,6 +4,10 @@ import { AppService } from './app.service';
 import { VerifyToken } from './middleware/verifyToken';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { BooksModule } from './books/books.module';
+import { CartModule } from './cart/cart.module';
+import { OrderModule } from './order/order.module';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -18,7 +22,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
       autoLoadEntities: true
     }),
-    UsersModule],
+    UsersModule,
+    BooksModule,
+    CartModule,
+    OrderModule,
+    TypeOrmModule.forFeature([User])],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -26,6 +34,6 @@ export class AppModule implements NestModule{
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(VerifyToken)
-      .forRoutes({path: '/', method: RequestMethod.ALL}, {path: '/', method: RequestMethod.ALL})
+      .forRoutes({path: '/books/admin/*', method: RequestMethod.ALL}, {path: '/', method: RequestMethod.ALL}, {path: '/cart/*', method: RequestMethod.ALL})
   }
 }

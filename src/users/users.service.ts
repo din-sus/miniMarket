@@ -20,13 +20,13 @@ export class UsersService {
           message: 'Please register❗'
         }
       }else{
-        let access_token = sign({login: createUserDto.login}, 'secret_key')
-        let refresh_token = sign({login: createUserDto.login}, 'secret_key', {expiresIn: 100})
+        let access_token = sign({id: check.id}, 'secret_key')
+        let refresh_token = sign({id: check.id}, 'secret_key', {expiresIn: '1d'})
 
         return {
           success: true,
           message: 'You have logined successfully✅',
-          token: refresh_token
+          token: access_token
         }
 
       }

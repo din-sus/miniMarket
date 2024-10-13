@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Cart } from "src/cart/entities/cart.entity";
+import { Order } from "src/order/entities/order.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -16,4 +18,11 @@ export class User {
 
     @Column({default: 'user'})
     role: string
+
+    @OneToMany(() => Order, (order) =>
+        order.user)
+        orders: Order[];
+    @OneToMany(() => Cart, (cart) =>
+        cart.user)
+        cart: Cart[];
 }
