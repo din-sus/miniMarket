@@ -4,7 +4,6 @@ import {
   Post,
   Body,
   Patch,
-  Param,
   Delete,
   Req,
   Res,
@@ -12,7 +11,7 @@ import {
 import { CartService } from './cart.service';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
-import { Request, Response, response } from 'express';
+import { Request, Response } from 'express';
 
 @Controller('cart')
 export class CartController {
@@ -24,6 +23,7 @@ export class CartController {
     @Res() response: Response,
     @Body() createCartDto: CreateCartDto,
   ) {
+    console.log(createCartDto);
     return this.cartService.create(request, response);
   }
 

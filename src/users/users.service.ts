@@ -22,18 +22,19 @@ export class UsersService {
       if (!check) {
         return {
           success: false,
-          message: 'Please register❗'
-        }
-      }else{
-        let access_token = sign({id: check.id}, 'secret_key')
-        let refresh_token = sign({id: check.id}, 'secret_key', {expiresIn: '1d'})
+          message: 'Please register❗',
+        };
+      } else {
+        let access_token = sign({ id: check.id }, 'secret_key');
+        let refresh_token = sign({ id: check.id }, 'secret_key', {
+          expiresIn: '1d',
+        });
 
         return {
           success: true,
           message: 'You have logined successfully✅',
-          token: access_token
-        }
-
+          token: access_token,
+        };
       }
     } catch (error) {
       return {

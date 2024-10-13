@@ -7,7 +7,11 @@ import { Book } from 'src/books/entities/book.entity';
 import { User } from 'src/users/entities/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Cart]), TypeOrmModule.forFeature([Book]), TypeOrmModule.forFeature([User])],
+  imports: [
+    TypeOrmModule.forFeature([Cart]),
+    TypeOrmModule.forFeature([Book]),
+    TypeOrmModule.forFeature([User]),
+  ],
   controllers: [CartController],
   providers: [CartService],
 })

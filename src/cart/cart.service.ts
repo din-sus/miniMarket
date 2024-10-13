@@ -58,12 +58,16 @@ export class CartService {
         message: 'What book do you want to add❓',
       };
     }
+    const userdata: User = request['user'];
+    console.log(userdata);
 
     const token: any = request.headers.token;
 
     try {
       const { id }: any = verify(token, 'secret_key');
-      const user = await this.userRepository.findOne({ where: { id: id } });
+      const user = await this.userRepository.findOne({
+        where: { id: userdata.id },
+      });
 
       if (!user) {
         return {
@@ -75,6 +79,7 @@ export class CartService {
       const bookFind = await this.bookRepository.findOne({
         where: { title: bookName },
       });
+      console.log(bookFind);
 
       if (!bookFind) {
         return {

@@ -31,7 +31,8 @@ import { User } from './users/entities/user.entity';
     BooksModule,
     CartModule,
     OrderModule,
-    TypeOrmModule.forFeature([User])],
+    TypeOrmModule.forFeature([User]),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -39,6 +40,10 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(VerifyToken)
-      .forRoutes({path: '/books/admin/*', method: RequestMethod.ALL}, {path: '/', method: RequestMethod.ALL}, {path: '/cart/*', method: RequestMethod.ALL})
+      .forRoutes(
+        { path: '/books/admin/*', method: RequestMethod.ALL },
+        { path: '/', method: RequestMethod.ALL },
+        { path: '/cart/*', method: RequestMethod.ALL },
+      );
   }
 }
